@@ -1,6 +1,7 @@
 #include <iostream>
+#include <utility>
 
-template <typename T> T* minmax(T* array, size_t size)
+template <typename T> std::pair<T, T> minmax(T* array, size_t size)
 {
     if (size != 0)
     {
@@ -12,10 +13,8 @@ template <typename T> T* minmax(T* array, size_t size)
         for (size_t i = 1; i < size; ++i) {
             (array[i] < cur_min) ? cur_min = array[i] : 1;
         }
-        T* res = new T[2]; // не очень понимаю почему в одной функции должно быть и мин и макс если честно
-        res[0] = cur_min;
-        res[1] = cur_max;
-        return res;
+        std::pair <T, T> result (cur_min, cur_max);
+        return result;
     }
     else
     {
@@ -27,6 +26,6 @@ template <typename T> T* minmax(T* array, size_t size)
 int main() {
     float a[4] = {100.0, 2, 3.0, 4};
     std::cout << "kk" << std::endl;
-    std::cout << minmax(a, 4)[0] << " " << minmax(a, 4)[1] << std::endl;
+    std::cout << minmax(a, 4).first << " " << minmax(a, 4).second << std::endl;
     return 0;
 }
